@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="card mb-3" style="max-width: 900px;">
+    <div class="row no-gutters">
+        <div class="col-md-7">
+            <img src="{{ photo_exz.photo.url }}" class="card-img" alt="#">
+        </div>
+        <div class="col-md-5">
+            <div class="card-body">
+                <h5 class="card-title"><font face="Courier New"/>{{ photo_exz.created_at }}</h5>
+                <p class="card-text">{{ photo_exz.content }}</p>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<h5>Комментарии:</h5><br>
+{% for i in comments %}
+<ul>
+    <li>{{ i.created_at }}</li>
+    <p>{{ i.name }}</p>
+    <p>{{ i.text }}</p>
+</ul>
+<hr>
+
+{% endfor %}
+{% if request.user.is_authenticated %}
+<form method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+
+    <button type="submit" class="btn btn-primary btn-block">Добавить комментарий</button>
+</form>
+{% endif %}
+
+
+{% endblock %}

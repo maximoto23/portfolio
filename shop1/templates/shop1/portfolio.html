@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="card-columns">
+    {% for i in page_obj.object_list %}
+    <div class="card">
+        <img src="{{ i.photo.url }}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{ i.title }}</h5>
+            <a href="{% url 'photo' i.id %}"><img src="{% static 'img/arrow-righ-3.png' %}" alt=""></a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+
+{% endblock %}
+

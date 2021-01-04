@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <title>ZIraMax-фото</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Nissa Photography studio html template">
+    <meta name="keywords" content="industry, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="shortcut icon"/>
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,900&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}"/>
+
+    <!-- Main Stylesheets -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+<div id="preloder">
+		<div class="loader"></div>
+	</div>
+<header class="header-section">
+    <div class="header-social">
+        {% if request.user.is_authenticated %}
+        <a href=""><font face="Courier New"/><h5>Добро пожаловать, {{ user.username }}</h5></a> |
+        <a href="{% url 'logout' %}"><font face="Courier New"/><h5>Выход</h5></a> |
+        {% else %}
+        <a href="{% url 'register' %}"><font face="Courier New"/><h5>Регистрация</h5></a> |
+        <a href="{% url 'login' %}"><font face="Courier New"/><h5>Авторизация</h5></a> |
+        {% endif %}
+        <a href="{% url 'index' %}"><font face="Courier New"/><h5>Главная страница</h5></a> |
+        <a href=""><i class="fa fa-pinterest"></i></a>
+        <a href=""><i class="fa fa-facebook"></i></a>
+        <a href=""><i class="fa fa-twitter"></i></a>
+        <a href=""><i class="fa fa-instagram"></i></a>
+    </div>
+</header>
+<div class="site-content-warp">
+    <!-- Left Side section -->
+    <div class="main-sidebar">
+        <div class="mb-warp">
+            <a href="{% static 'index.html' %}" class="site-logo">
+                <h3>ZIraMax</h3>
+                <p>Фотограф</p>
+            </a>
+            <div class="about-info">
+                <h3><font face="Courier New"/>«Выдающаяся фотография – это глубина чувств, а не глубина резкости»</h3>
+                <p></p>
+            </div>
+            <ul class="contact-info">
+                <li>Brest, Belarus</li>
+                <li>+375 33 633 26 19</li>
+                <li><a href="https://mail.ru/maks_fraj1@mail.ru">maks_fraj1@mail.ru</a></li>
+            </ul>
+            <a href="#" class="site-btn">see my portfolio <img src="{% static 'img/arrow-right.png' %}" alt=""></a>
+        </div>
+    </div>
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.tags == 'error' %}
+    <div class="alert alert-danger" role="alert">{{ message }}</div>
+    {% else %}
+    <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% block content %}{% endblock %}
+    <nav aria-label="Page navigation example" alighn="center">
+        <ul class="pagination">
+            {% for i in page_obj.paginator.page_range %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            </li>
+            {% endfor %}
+        </ul>
+    </nav>
+</div>
+<!-- Page start -->
+
+<div class="copyright">
+    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+        All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a
+                href="https://colorlib.com" target="_blank">Colorlib</a>
+        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+</div>
+</div>
+<!-- Main section end -->
+
+<!--====== Javascripts & Jquery ======-->
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/jquery.nicescroll.min.js' %}"></script>
+<script src="{% static 'js/circle-progress.min.js' %}"></script>
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>
